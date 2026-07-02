@@ -1,0 +1,14 @@
+class Student:
+    def __init__(self, sid, name, dept, enrolled=True):
+        self.student_id = sid
+        self.name = name
+        self.department = dept
+        self.is_enrolled = enrolled
+
+if __name__ == '__main__':
+    s = Student(202601, "Anisur Rahman", "CSE")
+    
+    print(f"ID: {s.student_id}")
+    print(f"Name: {s.name}")
+    print(f"Dept: {s.department}")
+    print(f"Enrolled: {s.is_enrolled}")
