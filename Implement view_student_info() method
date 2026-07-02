@@ -1,0 +1,13 @@
+class Student:
+    def __init__(self, sid, name, dept, enrolled=True):
+        self.student_id = sid
+        self.name = name
+        self.department = dept
+        self.is_enrolled = enrolled
+
+    def enroll_student(self):
+        if not self.is_enrolled:
+            self.is_enrolled = True
+            print(f"{self.name} has been successfully enrolled.")
+        else:
+            print(f"{self.name} is already enrolledNormally I can help with things like this, but I don't seem to have access to that content. You can try again or ask me for something else.
