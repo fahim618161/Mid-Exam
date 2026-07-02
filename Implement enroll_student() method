@@ -1,0 +1,24 @@
+class Student:
+    def __init__(self, sid, name, dept, enrolled=True):
+        self.student_id = sid
+        self.name = name
+        self.department = dept
+        self.is_enrolled = enrolled
+
+    def enroll_student(self):
+        if not self.is_enrolled:
+            self.is_enrolled = True
+            print(f"{self.name} has been successfully enrolled.")
+        else:
+            print(f"{self.name} is already enrolled.")
+
+class StudentDatabase:
+    student_list = []
+    def add_student(cls, student_obj):
+        cls.student_list.append(student_obj)
+
+if __name__ == '__main__':
+    s1 = Student(103, "Tamim Iqbal", "SWE", enrolled=False)
+    print(f"Initial enrollment status: {s1.is_enrolled}")
+    s1.enroll_student()
+    s1.enroll_student()
