@@ -1,0 +1,19 @@
+class Student:
+    def __init__(self, name, student_id):
+        self.name = name
+        self.id = student_id
+
+class StudentDatabase:
+    student_list = []
+    def add_student(cls, student_obj):
+        cls.student_list.append(student_obj)
+
+if __name__ == '__main__':
+    s1 = Student("Rahman", 101)
+    s2 = Student("Karim", 102)
+
+    StudentDatabase.add_student(s1)
+    StudentDatabase.add_student(s2)
+
+    for s in StudentDatabase.student_list:
+        print(f"ID: {s.id}, Name: {s.name}")
