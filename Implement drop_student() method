@@ -1,0 +1,33 @@
+class Student:
+    def __init__(self, sid, name, dept, enrolled=True):
+        self.student_id = sid
+        self.name = name
+        self.department = dept
+        self.is_enrolled = enrolled
+
+    def enroll_student(self):
+        if not self.is_enrolled:
+            self.is_enrolled = True
+            print(f"{self.name} has been successfully enrolled.")
+        else:
+            print(f"{self.name} is already enrolled.")
+
+    def drop_student(self):
+        if self.is_enrolled:
+            self.is_enrolled = False
+            print(f"{self.name} has successfully dropped out.")
+        else:
+            print(f"{self.name} is already not enrolled.")
+
+class StudentDatabase:
+    student_list = []
+    def add_student(cls, student_obj):
+        cls.student_list.append(student_obj)
+
+if __name__ == '__main__':
+    s1 = Student(104, "Fahim Ahmed", "CSE", enrolled=True)
+    
+    print(f"Initial enrollment status: {s1.is_enrolled}")
+    s1.drop_student()
+    print(f"Status after dropping: {s1.is_enrolled}")
+    s1.drop_student()
