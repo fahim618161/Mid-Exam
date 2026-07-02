@@ -1,0 +1,99 @@
+class Student:
+    def __init__(self, sid, name, dept, enrolled=True):
+        # Using double underscores (__) makes these attributes private
+        self.__student_id = sid
+        self.__name = name
+        self.__department = dept
+        self.__is_enrolled = enrolled
+    def student_id(self):
+        return self.__student_id
+    def name(self):
+        return self.__name
+    def department(self):
+        return self.__department
+    def is_enrolled(self):
+        return self.__is_enrolled
+    def enroll_student(self):
+        if not self.__is_enrolled:
+            self.__is_enrolled = True
+            print(f"\n[Success] {self.__name} has been successfully enrolled.")
+        else:
+            print(f"\n[Notice] Error: {self.__name} is already enrolled. Cannot enroll again.")
+    def drop_student(self):
+        if self.__is_enrolled:
+            self.__is_enrolled = False
+            print(f"\n[Success] {self.__name} has successfully dropped out.")
+        else:
+            print(f"\n[Notice] Error: {self.__name} is not enrolled. Cannot drop them.")
+    def view_student_info(self):
+        status = "Enrolled" if self.__is_enrolled else "Dropped"
+        print(f"ID: {self.__student_id} | Name: {self.__name:<15} | Dept: {self.__department:<5} | Status: {status}")
+class StudentDatabase:
+    student_list = []
+
+    def add_student(cls, student_obj):
+        cls.student_list.append(student_obj)
+
+    def find_student(cls, sid):
+        for s in cls.student_list:
+            # Accessible externally via the getter property safely
+            if s.student_id == sid:
+                return s
+        return None
+def main():
+    StudentDatabase.add_student(Student(101, "Ayon Sen", "CSE", enrolled=True))
+    StudentDatabase.add_student(Student(102, "Nabila Islam", "EEE", enrolled=False))
+
+    while True:
+        print("\n" + "="*30)
+        print("    STUDENT DATABASE MENU    ")
+        print("="*30)
+        print("1. View All Students")
+        print("2. Enroll Student")
+        print("3. Drop Student")
+        print("4. Exit")
+        print("="*30)
+        
+        choice = input("Enter your choice (1-4): ").strip()
+
+        if choice == '1':
+            print("\n--- Student Records ---")
+            if not StudentDatabase.student_list:
+                print("No records found in the database.")
+            else:
+                for student in StudentDatabase.student_list:
+                    student.view_student_info()
+
+        elif choice == '2':
+            print("\n--- Enroll Existing Student ---")
+            try:
+                sid = int(input("Enter Student ID to enroll: "))
+                student = StudentDatabase.find_student(sid)
+                if student:
+                    student.enroll_student()
+                else:
+                    print("\n[Error] Invalid Student ID: Student record not found.")
+            except ValueError:
+                print("\n[Error] Invalid Input: ID must be a numeric integer.")
+
+        elif choice == '3':
+            print("\n--- Drop Student ---")
+            try:
+                sid = int(input("Enter Student ID to drop: "))
+                student = StudentDatabase.find_student(sid)
+                if student:
+                    student.drop_student()
+                else:
+                    print("\n[Error] Invalid Student ID: Student record not found.")
+            except ValueError:
+                print("\n[Error] Invalid Input: ID must be a numeric integer.")
+
+        elif choice == '4':
+            print("\nExiting system. Goodbye!")
+            break
+        else:
+            print("\n[Error] Invalid Option: Please choose a valid number between 1 and 4.")
+
+
+if __name__ == '__main__':
+    main()
